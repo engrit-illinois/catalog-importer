@@ -1,93 +1,33 @@
-﻿using Application.Importers;
+﻿using Application.Common.Utilities;
 
-namespace Application.Common.Utilities;
-public static class ImporterHelper
+namespace Application.Parsers.CourseParsers;
+public class CourseRowParser
 {
-    internal const string s_areaHeaderClass = "areaheader";
-    internal const string s_commentClass = "courselistcomment";
-    internal const string s_commentIndentClass = "commentindent";
-    internal const string s_orClass = "orclass";
-    internal const string s_firstRowClass = "firstrow";
-    internal const string s_lastRowClass = "lastrow";
-    internal const string s_hoursColClass = "hourscol";
-    internal const int courseRowColumnCount = 3;
-    internal static readonly string[] s_tableTitleElements = ["h3", "h4", "h5", "h6"];
-
-    public static async Task<HtmlDocument?> LoadDocument(string url)
+    public static DegreeRequirementCourse Parse(HtmlNode rowNode)
     {
-        using HttpClient client = new();
+        return ParseCourseRow(rowNode);
+    }
 
-        HttpResponseMessage response = await client.GetAsync(url);
-        HtmlDocument doc = new();
+    public static byte GetRowCreditHours(HtmlNode rowNode)
+    {
+        byte hours = 0;
+        var hoursNode = rowNode.ChildNodes
+                                .FirstOrDefault(node =>
+                                    node.NodeType == HtmlNodeType.Element
+                                    && node.Name == "td"
+                                    && node.GetAttributeValue("class", "").Contains(CatalogInfo.s_hoursColClass)
+                                );
 
-        if (response.IsSuccessStatusCode)
+        //TODO: handle range, such as 0-15 from AE gen ed requirements table
+        if (hoursNode != null)
         {
-            string html = await response.Content.ReadAsStringAsync();
-            html = HtmlEntity.DeEntitize(html);
-
-            html = html.Replace("\u00A0", " ").Replace("\u0026", "&");
-            doc.LoadHtml(html);
-            return doc;
+            _ = byte.TryParse(hoursNode.InnerText.Trim(), out hours);
         }
 
-        return null;
+        return hours;
     }
 
-    public static async Task<HtmlNode?> LoadRequirementsDocument(string url)
-        => (await LoadDocument(url))?.DocumentNode.SelectSingleNode($"//div[@id='{CatalogInfo.HtmlDegreeContainerId}']");
-
-    public static IDegreeImporter CreateImporter()
-    {
-        var type = typeof(CEE_Importer_2024);
-        return CreateImporter(type);
-    }
-
-    public static IDegreeImporter CreateImporter(Type type)
-    {
-        return (IDegreeImporter)Activator.CreateInstance(type);
-    }
-
-    internal static IReadOnlyCollection<DegreeRequirementSection> GetDegreeSections(HtmlNode requirementsNode)
-    {
-        var sections = new List<DegreeRequirementSection>();
-
-        var sectionHeadings = requirementsNode.GetHtmlSectionHeadings();
-
-        foreach (var htmlSectionHeading in sectionHeadings)
-        {
-            var section = new DegreeRequirementSection
-            {
-                Title = htmlSectionHeading.InnerText
-            };
-
-            var sectionInstructionNodes = htmlSectionHeading.GetHtmlSectionInstructions();
-
-            section.Instructions = string.Join(" ", sectionInstructionNodes.Select(x => x.InnerText));
-
-            var sectionTables = htmlSectionHeading.GetHtmlSectionTables();
-
-            if (sectionTables != null)
-            {
-                foreach (var table in sectionTables)
-                {
-                    var reqList = new DegreeRequirementList()
-                    {
-                        Title = "",
-
-                    };
-
-                    section.DegreeRequirementList.Add(new DegreeRequirementList() { Title = table.InnerText });
-                    //section.DegreeRequirementList.AddRange(table.GetDegreeRequirementList());
-                }
-            }
-
-            sections.Add(section);
-        }
-
-        return sections;
-    }
-
-    internal static DegreeRequirementCourse HandleCourseRow(HtmlNode row, HtmlNode? alternativeCourseRow = null)
+    protected static DegreeRequirementCourse ParseCourseRow(HtmlNode row, HtmlNode? alternativeCourseRow = null)
     {
         var cells = row.SelectNodes(".//td");
 
@@ -159,7 +99,7 @@ public static class ImporterHelper
         var firstSibling = row.SelectSingleNode($"following-sibling::tr[1]");
         var secondSibling = row.SelectSingleNode($"following-sibling::tr[2]");
 
-        if (firstSibling != null && firstSibling.GetAttributeValue("class", "").Contains(s_orClass))
+        if (firstSibling != null && firstSibling.GetAttributeValue("class", "").Contains(CatalogInfo.s_orClass))
         {
             string codeColPath = ".//td[contains(@class, 'codecol')]";
             string titleColPath = ".//td[2]";
@@ -168,7 +108,7 @@ public static class ImporterHelper
             requirement.AltCourse1Description = firstSibling.SelectSingleNode(titleColPath).InnerText.Trim();
 
             // only use the second sibling if it's directly after another "orclass", so we know it goes with the main course
-            if (secondSibling != null && secondSibling.GetAttributeValue("class", "").Contains(s_orClass))
+            if (secondSibling != null && secondSibling.GetAttributeValue("class", "").Contains(CatalogInfo.s_orClass))
             {
                 requirement.AltCourse2 = secondSibling.SelectSingleNode(codeColPath).InnerText.Trim();
                 requirement.AltCourse2Description = secondSibling.SelectSingleNode(titleColPath).InnerText.Trim();
@@ -209,5 +149,4 @@ public static class ImporterHelper
 
         return requirement;
     }
-
 }

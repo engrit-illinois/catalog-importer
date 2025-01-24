@@ -30,5 +30,5 @@ public partial class DegreeRequirementCourse
 
     public int TableListId { get; set; }
 
-    public virtual DegreeRequirementTableList TableList { get; set; } = null!;
+    public virtual DegreeRequirementTableArea TableList { get; set; } = null!;
 }

@@ -1,4 +1,5 @@
-﻿using Application.Parsers;
+﻿using Application.Common.Utilities;
+using Application.Parsers.Factories;
 
 namespace Application;
 public class RequirementProcessor(PageScraper scraper, SectionParserFactory factory)
@@ -6,10 +7,12 @@ public class RequirementProcessor(PageScraper scraper, SectionParserFactory fact
     private readonly PageScraper _scraper = scraper;
     private readonly SectionParserFactory _factory = factory;
 
-    public async Task Process(string url)
+    public async Task<DegreeEntry> Process(DegreeEntry degree)
     {
-        var html = await _scraper.GetDegreeRequirementsNode(url);
-        var parser = _factory.GetParser(url, html);
-        var sections = parser.Parse(html);
+        var catalogUrl = CatalogHelper.GetCurrentUgradUrl(degree.CatalogUrl);
+        var html = await _scraper.GetDegreeRequirementsNode(catalogUrl);
+        degree.DegreeRequirementSections = _factory.GetParser(degree).Parse(html);
+
+        return degree;
     }
 }

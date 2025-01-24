@@ -1,6 +1,4 @@
-﻿using Application.Importers;
-
-namespace Application.Common.Constants;
+﻿namespace Application.Common.Constants;
 
 public static class Degrees
 {
@@ -9,14 +7,17 @@ public static class Degrees
         Name = "Department of Civil and Environmental Engineering",
         CatalogKey = "engineering",
         DegreeEntries = {
-            new() {
-                Name = "Civil Engineering, BS",
-                MajorCode = "0106",
-                CatalogYear = 2024,
-                CatalogUrl = "engineering/civil-engineering-bs",
-                DegreeImporterType = typeof(CEE_Importer_2024)
-            },
-            new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogUrl = "engineering/environmental-engineering-bs" }
+            new() { Name = "Civil Engineering, BS", MajorCode = "0106", CatalogYear = 2024, CatalogUrl = "engineering/civil-engineering-bs" },
+            new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogYear = 2024, CatalogUrl = "engineering/environmental-engineering-bs" }
+        }
+    };
+
+    public static readonly Department AerospaceEngineering = new()
+    {
+        Name = "Aerospace Engineering",
+        CatalogKey = "engineering",
+        DegreeEntries = {
+            new() { Name = "Aerospace Engineering, BS", MajorCode = "1647", CatalogYear = 2024, CatalogUrl = "engineering/aerospace-engineering-bs" },
         }
     };
 

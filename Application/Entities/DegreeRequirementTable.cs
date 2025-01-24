@@ -11,5 +11,5 @@ public class DegreeRequirementTable
     public int DegreeRequirementSectionId { get; set; }
 
     public virtual DegreeRequirementSection DegreeRequirementSection { get; set; } = null!;
-    public virtual ICollection<DegreeRequirementTableList> DegreeRequirementTableLists { get; set; } = [];
+    public virtual ICollection<DegreeRequirementTableArea> DegreeRequirementTableAreas { get; set; } = [];
 }

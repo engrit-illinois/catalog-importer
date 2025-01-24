@@ -6,7 +6,7 @@ internal static class CourseCodeHelper
 
         string[] parts = course.Split(' ');
 
-        if (parts.Length == 0 || parts.Length == 1)
+        if (parts.Length is 0 or 1)
         {
             parts = course.Split('\u00A0');
             throw new ArgumentException("Invalid course code format");

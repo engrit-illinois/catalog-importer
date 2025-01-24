@@ -13,6 +13,15 @@ internal class CatalogInfo
 
     public static readonly string HtmlDegreeContainerId = "degreerequirementstextcontainer";
 
+    internal const string s_areaHeaderClass = "areaheader";
+    internal const string s_commentClass = "courselistcomment";
+    internal const string s_commentIndentClass = "commentindent";
+    internal const string s_orClass = "orclass";
+    internal const string s_firstRowClass = "firstrow";
+    internal const string s_lastRowClass = "lastrow";
+    internal const string s_hoursColClass = "hourscol";
+    internal const int courseRowColumnCount = 3;
+    internal static readonly string[] s_tableTitleElements = ["h3", "h4", "h5", "h6"];
 
     public static Dictionary<string, string> EngineeringGenEdList = new()
     {
