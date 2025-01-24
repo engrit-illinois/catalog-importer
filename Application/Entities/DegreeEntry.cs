@@ -11,7 +11,7 @@ public class DegreeEntry
     public int CatalogYear { get; set; }
     public string CatalogUrl { get; set; } = string.Empty;
 
-    public List<DegreeRequirementSection> RequirementSections { get; set; } = [];
+    public virtual ICollection<DegreeRequirementSection> DegreeRequirementSections { get; set; } = [];
 
     [NotMapped]
     public Type? DegreeImporterType { get; internal set; } = null!;

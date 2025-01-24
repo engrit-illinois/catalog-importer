@@ -28,7 +28,7 @@ public partial class DegreeRequirementCourse
 
     public string? AltCourse3Description { get; set; }
 
-    public int ListId { get; set; }
+    public int TableListId { get; set; }
 
-    public virtual DegreeRequirementList List { get; set; } = null!;
+    public virtual DegreeRequirementTableList TableList { get; set; } = null!;
 }

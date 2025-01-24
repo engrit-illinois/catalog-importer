@@ -1,6 +1,4 @@
-﻿using Application.Parsers;
-
-namespace Application;
+﻿namespace Application.Parsers;
 public class SectionParserFactory
 {
     public ISectionParser GetParser(string url, HtmlNode html)

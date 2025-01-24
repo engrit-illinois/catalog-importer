@@ -1,4 +1,6 @@
-﻿namespace Application;
+﻿using Application.Parsers;
+
+namespace Application;
 public class RequirementProcessor(PageScraper scraper, SectionParserFactory factory)
 {
     private readonly PageScraper _scraper = scraper;
