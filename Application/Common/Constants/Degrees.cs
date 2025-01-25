@@ -22,6 +22,12 @@ public static class Degrees
     };
 
 
+    public static readonly IReadOnlyList<Department> AllDepartments = new List<Department>
+    {
+        CivilAndEnvironmentalEngineering,
+        AerospaceEngineering
+    };
+
     //public static DegreeProgram AERO = new() { Name = "Aerospace Engineering, BS", MajorCode = "4048", CatalogUri = "engineering/aerospace-engineering-bs" };
     //public static DegreeProgram ABE = new() { Name = "Agricultural & Biological Engineering, BS", MajorCode = "5163", CatalogUri = "eng_aces/agricultural-biological-engineering-bs" };
     //public static DegreeProgram ABE_Bioprocess = new() { Name = "Agricultural & Biological Engineering: Bioprocess Engineering and Industrial Biotechnology", MajorCode = "5163", ConcentrationCode = "6223", CatalogUri = "eng_aces/agricultural-biological-engineering-bs/bioprocess-engineering-industrial-biotechnology" };

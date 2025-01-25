@@ -1,5 +1,5 @@
 ﻿namespace Application.Common.Constants;
-internal class CatalogInfo
+public class CatalogInfo
 {
     public static string CatalogUrl => "http://catalog.illinois.edu";
 

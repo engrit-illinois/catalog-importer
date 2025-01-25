@@ -1,0 +1,19 @@
+﻿@model (DegreeRequirementTableArea Area, int Level)
+
+@if (!string.IsNullOrEmpty(Model.Area.Title) && Model.Area.Hours is not null)
+{
+    <tr data-level="@Model.Level">
+        <td colspan="2">@Model.Area.Title</td>
+        <td>@Model.Area.Hours</td>
+    </tr>
+}
+
+@foreach (var course in Model.Area.DegreeRequirementCourses)
+{
+    <partial name="_CourseRow" model="(course, Model.Level)" />
+}
+
+@if (Model.Area.ChildAreas != null && Model.Area.ChildAreas.Any())
+{
+    <partial name="_TableArea" model="(Model.Area.ChildAreas, Model.Level + 1)" />
+}

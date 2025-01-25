@@ -1,0 +1,26 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <h1 class="display-4">Undergraduate Majors and Concentrations</h1>
+
+    <h2>2024-2025</h2>
+    <ul>
+        @foreach (var department in Application.Common.Constants.Degrees.AllDepartments)
+        {
+            <li>
+                <h3>@department.Name</h3>
+                <ul>
+                    @foreach (var degree in department.DegreeEntries.Where(d => d.CatalogYear == 2024))
+                    {
+                        var url = $"/degrees/undergraduate/{degree.CatalogYear}/{degree.CatalogUrl}";
+                        <li><a href="@Html.Raw(url)">@degree.Name</a></li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>

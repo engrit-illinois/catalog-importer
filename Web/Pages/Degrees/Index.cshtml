@@ -1,0 +1,65 @@
+﻿@page "/degrees/{AcademicLevel}/{Year}/{*CatalogPath}"
+@model DegreeModel
+@{
+    ViewData["Title"] = "Degree";
+}
+
+<div>
+    @* <h1 class="mb-4">@Model.DegreeName</h1> *@
+
+    <div class="d-flex">
+        <ul class="nav nav-pills flex-grow-1" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tables-tab" data-bs-toggle="tab" data-bs-target="#tables-tab-pane" type="button" role="tab" aria-controls="table-tab-pane" aria-selected="true">Tables</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="data-tab" data-bs-toggle="tab" data-bs-target="#data-tab-pane" type="button" role="tab" aria-controls="data-tab-pane" aria-selected="false">Parsed Data</button>
+            </li>
+        </ul>
+
+        <a href="@Model.CatalogDegreeUrl/#degreerequirementstext" class="btn btn-outline-primary" target="_blank">
+            Source Link
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16" style="margin-top: -5px;">
+                <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5" />
+                <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
+            </svg>
+        </a>
+    </div>
+
+    <hr class="mb-4" />
+
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane show active" id="tables-tab-pane" role="tabpanel" aria-labelledby="tables-tab" tabindex="0">
+            @foreach(var degreeSection in Model.DegreeEntryResult.DegreeRequirementSections)
+            {
+                <h2 class="mb-4">@degreeSection.Title</h2>
+                <p>@degreeSection.Instructions</p>
+
+                @foreach (var sectionTable in degreeSection.DegreeRequirementTables)
+                {
+                    <table class="table table-bordered table-striped">
+                        <tbody>
+                            @foreach(var area in sectionTable.DegreeRequirementTableAreas)
+                            {
+                                <partial name="_TableArea" model="(area, 1)" />
+                            }
+                        </tbody>
+                    </table>
+                }
+            }
+        </div>
+        <div class="tab-pane" id="data-tab-pane" role="tabpanel" aria-labelledby="data-tab" tabindex="0">
+            <div class="card text-bg-light">
+                <div class="card-header">Serialized to JSON</div>
+                <div class="card-body">
+                    @{
+                        var json = Model.DegreeRequirementJsonResults;
+                    }
+                    <pre class=""><code>@Html.Raw(Model.DegreeRequirementJsonResults)</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

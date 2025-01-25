@@ -1,5 +1,4 @@
 ﻿using Application.Common.Utilities;
-using Application.Parsers.Factories;
 
 namespace Application;
 public class RequirementProcessor(PageScraper scraper, SectionParserFactory factory)
