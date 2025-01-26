@@ -5,8 +5,15 @@ public static class TableParserFactory
     {
         bool hasArea = tableNode.HasTableArea();
         bool hasAreaSubArea = tableNode.HasTableSubArea();
+        HtmlNode? firstRowNode = tableNode.GetFirstRow();
 
-        if (hasArea)
+
+        if (firstRowNode is not null
+            && firstRowNode.InnerText.StartsWith("Students choose a primary and a secondary field"))
+        {
+            return new CivilEngineeringFieldsTableParser();
+        }
+        else if (hasArea)
         {
             return new SingleAreaLevelTableParser();
         }

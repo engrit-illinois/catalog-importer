@@ -67,13 +67,37 @@ public abstract class BaseTableParser
     }
 
 
+    //internal virtual Func<HtmlNode, int> GetHeaderType(HtmlNode row)
+    //{
+    //    HtmlNode commentNode = row.SelectSingleNode($".//td[1]/div/span[contains(@class, '{s_commentClass}')]")
+    //                            ?? row.SelectSingleNode($".//td[1]/span[contains(@class, '{s_commentClass}')]");
+    //    HtmlNode hoursNode = row.SelectSingleNode($".//td[2][contains(@class, '{s_hoursColClass}')]");
+    //    bool isHoursRow = hoursNode != null && !string.IsNullOrEmpty(hoursNode.InnerText);
+    //    bool isFirstRow = row.GetAttributeValue("class", "").Contains(s_firstRowClass);
+    //    bool isAreaHeader = row.GetAttributeValue("class", "").Contains(s_areaHeaderClass);
+    //    bool isComment = commentNode != null;
+    //    bool isIndentedComment = commentNode != null && commentNode.GetAttributeValue("class", "").Contains(s_commentIndentClass);
+
+    //    bool isActuallyCourse = row.ChildNodes.Count == 2 && row.ChildNodes[0].InnerText.Trim() == "Any 400 level MATH course, excluding MATH 415, MATH 441, and MATH 442"; // Engineering Mechanics, Secondary Field Option Electives
+
+    //    bool isLevel1 =
+    //            (isAreaHeader && !isHoursRow && !isIndentedComment)
+    //            || isAreaHeader && row.ChildNodes[0].InnerText.Trim().EndsWith(':') // skip Electrical Engineering Tech Electives, "Non-ECE courses from list below:". It should be second level
+    //            || row.ChildNodes[0].InnerText.Trim() == "Human Factors" // Industrial Engineering, "Human Factors" row
+    //            || (row.ChildNodes[0].InnerText.EndsWith("Electives") && !isHoursRow); // Nuclear Plasma...: Plasma & Fusion Science & Engineering, Professional Concentration Area, "Electives" rows
+
+    //    return isLevel1 ? 1 : default;
+    //}
+
+    //private static Func<HtmlNode, int> GetHeaderType = (HtmlNode row) =>
+
     /* Examples to check:
      * http://catalog.illinois.edu/undergraduate/engineering/bioengineering-bs
      * http://catalog.illinois.edu/undergraduate/eng_aces/agricultural-biological-engineering-bs/sustainable-ecological-environmental-systems-engineering
      * http://catalog.illinois.edu/undergraduate/engineering/civil-engineering-bs
      * http://catalog.illinois.edu/undergraduate/engineering/computer-engineering-bs table 4
      */
-    public static List<DegreeRequirementTableArea> GetTableAreas(
+    public virtual List<DegreeRequirementTableArea> GetTableAreas(
         HtmlNodeCollection rows, Func<HtmlNode, int> areaHeaderLevelFunc)
     {
         List<DegreeRequirementTableArea> lists = [];
@@ -87,16 +111,16 @@ public abstract class BaseTableParser
             DegreeRequirementTableArea list = new();
             int level = areaHeaderLevelFunc(row);
 
-            //if (level > 0)
-            //{
-            //    list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
-            //    list.Hours = CourseRowParser.GetRowCreditHours(row);
-            //}
-
-            if (level == 1)
+            if (level > 0)
             {
                 list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
                 list.Hours = CourseRowParser.GetRowCreditHours(row);
+            }
+
+            if (level == 1)
+            {
+                //list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
+                //list.Hours = CourseRowParser.GetRowCreditHours(row);
                 lists.Add(currentLevel1 = list);
                 currentLevel2 = currentLevel3 = currentLevel4 = null;
             }

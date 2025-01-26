@@ -42,3 +42,27 @@ tr[data-list-course-level="2"] > td:first-child {
     padding-left: 40px !important;
 }
 
+tr[data-level="3"] > td:first-child {
+    padding-left: 40px !important;
+}
+
+tr[data-list-course-level="3"] > td:first-child {
+    padding-left: 60px !important;
+}
+
+tr[data-level="4"] > td:first-child {
+    padding-left: 60px !important;
+}
+
+tr[data-list-course-level="4"] > td:first-child {
+    padding-left: 80px !important;
+}
+
+tr[data-level="5"] > td:first-child {
+    padding-left: 80px !important;
+}
+
+tr[data-list-course-level="5"] > td:first-child {
+    padding-left: 100px !important;
+}
+

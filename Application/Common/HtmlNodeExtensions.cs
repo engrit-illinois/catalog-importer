@@ -106,6 +106,7 @@ internal static class HtmlNodeExtensions
             return sectionNode.SelectSingleNode($".//div[@id='textcontainer']").SelectNodes(".//table");
         }
     }
+
     internal static HtmlNode TableBodyNode(this HtmlNode tableNode)
     {
         if (tableNode.Name != "table")
@@ -130,6 +131,7 @@ internal static class HtmlNodeExtensions
 
         return tableNode.TableBodyNode().ChildNodes.Any(c => c.HasClass(CatalogInfo.s_areaHeaderClass));
     }
+
     internal static bool HasTableSubArea(this HtmlNode tableNode, bool skipFirstRow = false)
     {
         if (tableNode.Name != "table")
@@ -138,6 +140,11 @@ internal static class HtmlNodeExtensions
         }
 
         return tableNode.TableBodyNode().ChildNodes.Any(c => c.HasClass(CatalogInfo.s_commentIndentClass));
+    }
+
+    internal static HtmlNode? GetFirstRow(this HtmlNode tableNode)
+    {
+        return tableNode.TableBodyNode().ChildNodes.FirstOrDefault(node => node.NodeType == HtmlNodeType.Element);
     }
 
     internal static HtmlNodeCollection GetTableAreas(this HtmlNode tableNode, bool skipFirstRow)

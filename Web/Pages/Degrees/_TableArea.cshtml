@@ -13,7 +13,7 @@
     <partial name="_CourseRow" model="(course, Model.Level)" />
 }
 
-@if (Model.Area.ChildAreas != null && Model.Area.ChildAreas.Any())
+@foreach(var area in Model.Area.ChildAreas)
 {
-    <partial name="_TableArea" model="(Model.Area.ChildAreas, Model.Level + 1)" />
+    <partial name="_TableArea" model="(area, Model.Level + 1)" />
 }
