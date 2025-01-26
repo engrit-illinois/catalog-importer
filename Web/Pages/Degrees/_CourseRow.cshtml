@@ -1,7 +1,7 @@
 ﻿@model (Application.Entities.DegreeRequirementCourse Course, int Level)
 
 <tr data-list-course-level="@(Model.Level)">
-    <td style="width:150px;" class="ps-@(Model.Level + 1)">
+    <td style="width:200px;" class="ps-@(Model.Level + 1)">
         <span>@Model.Course.SubjectCode @Model.Course.CourseNumber</span>
         @if (Model.Course.AltCourse1 is not null)
         {
@@ -26,7 +26,7 @@
             <span class="d-block">@Model.Course.AltCourse2Description</span>
         }
      </td>
-     <td class="text-end" style="width:64px;">
+     <td class="hourscol">
          @if (@Model.Course.HoursMax is not null and > 0)
          {
              if (@Model.Course.HoursMax - @Model.Course.HoursMin == 1)

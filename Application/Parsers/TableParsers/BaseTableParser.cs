@@ -33,7 +33,7 @@ public abstract class BaseTableParser
         {
             hoursNode = lastRow.ChildNodes[1];
         }
-        else if (firstRow.HasClass(s_firstRowClass) && firstRow.ChildNodes[0].FirstChild.HasClass(s_commentClass))
+        else if (IsFirstRowTableComment(tableNode))
         {
             hoursNode = firstRow.ChildNodes[1];
         }
@@ -48,18 +48,35 @@ public abstract class BaseTableParser
         return hours;
     }
 
-    protected static string? GetTableComment(HtmlNode tableNode)
+    protected static bool IsFirstRowTableComment(HtmlNode tableNode)
     {
-        var tableBody = tableNode.SelectSingleNode(".//tbody");
-        var firstRow = tableBody.ChildNodes.First(node => node.NodeType == HtmlNodeType.Element);
+        var firstRow = tableNode.TableBodyNode().ChildNodes.First(node => node.NodeType == HtmlNodeType.Element);
+
+        if (firstRow != null && firstRow.HasChildNodes && firstRow.ChildNodes[0].HasChildNodes)
+        {
+            /* ex. Aerospace Engineering Technical Electives table with top comment and hours
+             * First row has first row class,
+             *   * first column class is comment and not areaheader,
+             *   * second column is hours
+             */
+
+            return firstRow.HasClass(s_firstRowClass)
+                    && firstRow.ChildNodes[0].FirstChild.HasClass(s_commentClass)
+                    && !firstRow.ChildNodes[0].FirstChild.HasClass(s_areaHeaderClass)
+                    && firstRow.ChildNodes[1].HasClass(s_hoursColClass);
+        }
+
+        return false;
+    }
+
+    protected virtual string? GetTableComment(HtmlNode tableNode)
+    {
         HtmlNode? instructionNode = null;
 
-        // ex. Aerospace Engineering Technical Electives table with top comment and hours
-        if (firstRow.HasClass(s_firstRowClass)
-            && firstRow.ChildNodes[0].FirstChild.HasClass(s_commentClass)
-            && firstRow.ChildNodes[1].HasClass(s_hoursColClass)
-        )
+        if (IsFirstRowTableComment(tableNode))
         {
+            var firstRow = tableNode.TableBodyNode().ChildNodes.First(node => node.NodeType == HtmlNodeType.Element);
+
             instructionNode = firstRow.ChildNodes[0];
         }
 

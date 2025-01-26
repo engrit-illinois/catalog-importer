@@ -38,12 +38,31 @@
                 @foreach (var sectionTable in degreeSection.DegreeRequirementTables)
                 {
                     <table class="table table-bordered table-striped">
+                        @if (!string.IsNullOrEmpty(sectionTable.Comment))
+                        {
+                            <thead class="">
+                                <tr>
+                                    <td colspan="2" class="fw-bold">@sectionTable.Comment</td>
+                                    <td class="hourscol">@sectionTable.Hours</td>
+                                </tr>
+                            </thead>
+                        }
+
                         <tbody>
                             @foreach(var area in sectionTable.DegreeRequirementTableAreas)
                             {
                                 <partial name="_TableArea" model="(area, 1)" />
                             }
                         </tbody>
+
+                        @if(sectionTable.Hours > 0){
+                            <tfoot class="table-group-divider">
+                                <tr>
+                                    <td colspan="2" class="fw-bold">Total Hours Required</td>
+                                    <td class="hourscol">@sectionTable.Hours</td>
+                                </tr>
+                            </tfoot>
+                        }
                     </table>
                 }
             }

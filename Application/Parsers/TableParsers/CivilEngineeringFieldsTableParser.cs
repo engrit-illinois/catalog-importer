@@ -29,6 +29,12 @@ public class CivilEngineeringFieldsTableParser : BaseTableParser, ITableParser
         return table;
     }
 
+    protected override string? GetTableComment(HtmlNode tableNode)
+    {
+        var firstRow = tableNode.TableBodyNode().ChildNodes.First(node => node.NodeType == HtmlNodeType.Element);
+        return firstRow.ChildNodes[0].InnerText.Trim();
+    }
+
     private static HtmlNodeCollection GetFieldRows(HtmlNodeCollection rows)
     {
         var primaryFieldRow = rows.FirstOrDefault(x => x.InnerText.StartsWith("Primary Field"));

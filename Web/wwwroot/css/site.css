@@ -30,6 +30,17 @@ body {
   text-align: start;
 }
 
+
+.hourscol {
+    text-align: end;
+    width: 4rem;
+}
+
+.table-group-divider {
+    border-top: calc(var(--bs-border-width)* 2) solid #999;
+}
+
+
 tr[data-list-course-level="1"] > td:first-child {
     padding-left: 20px !important;
 }

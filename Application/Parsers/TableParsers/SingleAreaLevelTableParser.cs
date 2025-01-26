@@ -4,7 +4,6 @@ public class SingleAreaLevelTableParser : BaseTableParser, ITableParser
 {
     public DegreeRequirementTable Parse(HtmlNode tableNode)
     {
-
         var tableComment = GetTableComment(tableNode);
         var tableHours = GetTableSummaryHours(tableNode);
         var skipFirstRow = tableComment is not null; // skip first row if was used in table comment above
@@ -37,7 +36,8 @@ public class SingleAreaLevelTableParser : BaseTableParser, ITableParser
                 (isAreaHeader && !isHoursRow && !isIndentedComment)
                 || isAreaHeader && row.ChildNodes[0].InnerText.Trim().EndsWith(':') // skip Electrical Engineering Tech Electives, "Non-ECE courses from list below:". It should be second level
                 || row.ChildNodes[0].InnerText.Trim() == "Human Factors" // Industrial Engineering, "Human Factors" row
-                || (row.ChildNodes[0].InnerText.EndsWith("Electives") && !isHoursRow); // Nuclear Plasma...: Plasma & Fusion Science & Engineering, Professional Concentration Area, "Electives" rows
+                || (row.ChildNodes[0].InnerText.EndsWith("Electives") && !isHoursRow) // Nuclear Plasma...: Plasma & Fusion Science & Engineering, Professional Concentration Area, "Electives" rows
+                || row.ChildNodes[0].InnerText.Trim().EndsWith("Primary Field"); // Env Engineering "Primary Fields" table area headers
 
         return isLevel1 ? 1 : default;
     };

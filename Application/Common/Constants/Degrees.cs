@@ -21,12 +21,28 @@ public static class Degrees
         }
     };
 
+    public static readonly Department AgriculturalAndBiologicalEngineering = new()
+    {
+        Name = "Agricultural & Biological Engineering",
+        CatalogKey = "eng_aces",
+        DegreeEntries =
+        {
+            new() { Name = "Agricultural & Biological Engineering: Bioprocess Engineering and Industrial Biotechnology", MajorCode = "5163", ConcentrationCode = "6223", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/bioprocess-engineering-industrial-biotechnology" },
+            new() { Name = "Agricultural & Biological Engineering: Off-Highway Vehicle and Equipment Engineering", MajorCode = "5163", ConcentrationCode = "6221", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/off-highway-vehicle-equipment-engineering" },
+            new() { Name = "Agricultural & Biological Engineering: Renewable Energy Systems Engineering", MajorCode = "5163", ConcentrationCode = "6222", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/renewable-energy-systems-engineering" },
+            new() { Name = "Agricultural & Biological Engineering: Soil and Water Resources Engineering", MajorCode = "5163", ConcentrationCode = "6218", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/soil-water-resources-engineering" },
+            new() { Name = "Agricultural & Biological Engineering: Sustainable Ecological and Environmental Systems Engineering", MajorCode = "5163", ConcentrationCode = "6219", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/sustainable-ecological-environmental-systems-engineering" },
+            new() { Name = "Agricultural & Biological Engineering: Synthetic Biological Engineering", MajorCode = "5163", ConcentrationCode = "6220", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/synthetic-biological-engineering" }
+        }
+    };
 
     public static readonly IReadOnlyList<Department> AllDepartments = new List<Department>
     {
+        AerospaceEngineering,
+        AgriculturalAndBiologicalEngineering,
         CivilAndEnvironmentalEngineering,
-        AerospaceEngineering
-    };
+    }
+    .OrderBy(d => d.Name).ToList();
 
     //public static DegreeProgram AERO = new() { Name = "Aerospace Engineering, BS", MajorCode = "4048", CatalogUri = "engineering/aerospace-engineering-bs" };
     //public static DegreeProgram ABE = new() { Name = "Agricultural & Biological Engineering, BS", MajorCode = "5163", CatalogUri = "eng_aces/agricultural-biological-engineering-bs" };
