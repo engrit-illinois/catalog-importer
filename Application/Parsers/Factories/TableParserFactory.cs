@@ -13,6 +13,11 @@ public static class TableParserFactory
         {
             return new CivilEngineeringFieldsTableParser();
         }
+        else if (firstRowNode is not null
+            && firstRowNode.InnerText.StartsWith("Students are required to complete 15 hours of credit from one track area listed below."))
+        {
+            return new BioengineeringTracksTableParser();
+        }
         else if (hasArea)
         {
             return new SingleAreaLevelTableParser();
