@@ -22,7 +22,11 @@ public static class TableParserFactory
         {
             return new ComputerEngineeringTrackTableParser();
         }
-
+        else if (firstRowNode is not null
+            && firstRowNode.ChildNodes[0].InnerText.EndsWith("Non-CS tech electives will not be considered in focus areas."))
+        {
+            return new ComputerScienceTechElectTableParser();
+        }
         else if (hasArea)
         {
             return new SingleAreaLevelTableParser();

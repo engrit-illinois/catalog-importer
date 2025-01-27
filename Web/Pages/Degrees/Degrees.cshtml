@@ -32,7 +32,7 @@
         <div class="tab-pane show active" id="tables-tab-pane" role="tabpanel" aria-labelledby="tables-tab" tabindex="0">
             @foreach(var degreeSection in Model.DegreeEntryResult.DegreeRequirementSections)
             {
-                <h2 class="mb-4">@degreeSection.Title</h2>
+                <h2 class="mb-4 fs-5">@degreeSection.Title</h2>
                 <p>@degreeSection.Instructions</p>
 
                 @foreach (var sectionTable in degreeSection.DegreeRequirementTables)

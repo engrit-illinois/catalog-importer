@@ -5,7 +5,6 @@ public static class Degrees
     public static readonly Department AerospaceEngineering = new()
     {
         Name = "Aerospace Engineering",
-        CatalogKey = "engineering",
         DegreeEntries = {
             new() { Name = "Aerospace Engineering, BS", MajorCode = "1647", CatalogYear = 2024, CatalogUrl = "engineering/aerospace-engineering-bs" },
         }
@@ -14,7 +13,6 @@ public static class Degrees
     public static readonly Department AgriculturalAndBiologicalEngineering = new()
     {
         Name = "Agricultural & Biological Engineering",
-        CatalogKey = "eng_aces",
         DegreeEntries =
         {
             new() { Name = "Agricultural & Biological Engineering, BS", MajorCode = "5163", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs" },
@@ -30,7 +28,6 @@ public static class Degrees
     public static readonly Department Bioengineering = new()
     {
         Name = "Bioengineering",
-        CatalogKey = "engineering",
         DegreeEntries = {
             new() { Name = "Bioengineering, BS", MajorCode = "0408", CatalogYear = 2024, CatalogUrl = "engineering/bioengineering-bs" }
         }
@@ -39,7 +36,6 @@ public static class Degrees
     public static readonly Department CivilAndEnvironmentalEngineering = new()
     {
         Name = "Civil and Environmental Engineering",
-        CatalogKey = "engineering",
         DegreeEntries = {
             new() { Name = "Civil Engineering, BS", MajorCode = "0106", CatalogYear = 2024, CatalogUrl = "engineering/civil-engineering-bs" },
             new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogYear = 2024, CatalogUrl = "engineering/environmental-engineering-bs" }
@@ -49,7 +45,6 @@ public static class Degrees
     public static readonly Department ChemicalAndBiomolecularEngineering = new()
     {
         Name = "Chemical & Biomolecular Engineering",
-        CatalogKey = "las",
         DegreeEntries = {
             //TODO
         }
@@ -58,9 +53,23 @@ public static class Degrees
     public static readonly Department ElectricalAndComputerAndEngineering = new()
     {
         Name = "Electrical & Computer Engineering",
-        CatalogKey = "las",
         DegreeEntries = {
             new() { Name = "Computer Engineering, BS", MajorCode = "0109", CatalogYear = 2024, CatalogUrl = "engineering/computer-engineering-bs" }
+        }
+    };
+
+    public static readonly Department ComputerScience = new()
+    {
+        Name = "Siebel School of Computing and Data Science",
+        DegreeEntries = {
+            new() { Name = "Computer Science, BS", MajorCode = "0112", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bs" },
+            new() { Name = "Computer Science + Animal Sciences, BS", MajorCode = "5864", CatalogYear = 2024, CatalogUrl = "aces/computer-science-animal-sciences-bs" },
+            new() { Name = "Computer Science + Anthropology, BSLAS", MajorCode = "5348", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-anthropology-bslas" },
+            new() { Name = "Computer Science + Astronomy, BSLAS", MajorCode = "5349", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-astronomy-bslas" },
+            new() { Name = "Computer Science + Bioengineering, BS", MajorCode = "6151", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bioengineering-bs" },
+            new() { Name = "Computer Science + Chemistry, BSLAS", MajorCode = "5350", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-chemistry-bslas" },
+            new() { Name = "Computer Science + Crop Sciences, BS", MajorCode = "5623", CatalogYear = 2024, CatalogUrl = "aces/computer-science-crop-sciences-bs" },
+            new() { Name = "Computer Science + Economics, BSLAS", MajorCode = "5667", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-economics-bslas" },
         }
     };
 
@@ -70,18 +79,12 @@ public static class Degrees
         AgriculturalAndBiologicalEngineering,
         Bioengineering,
         CivilAndEnvironmentalEngineering,
+        ComputerScience,
         ElectricalAndComputerAndEngineering,
     }
     .OrderBy(d => d.Name).ToList();
 
-    //public static DegreeProgram CS = new() { Name = "Computer Science, BS", MajorCode = "0112", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bs" };
-    //public static DegreeProgram CS_Animal_Science = new() { Name = "Computer Science + Animal Sciences, BS", MajorCode = "5864", CatalogYear = 2024, CatalogUrl = "aces/computer-science-animal-sciences-bs" };
-    //public static DegreeProgram CS_Anthropology = new() { Name = "Computer Science + Anthropology, BSLAS", MajorCode = "5348", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-anthropology-bslas" };
-    //public static DegreeProgram CS_Astronomy = new() { Name = "Computer Science + Astronomy, BSLAS", MajorCode = "5349", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-astronomy-bslas" };
-    //public static DegreeProgram CS_Bioengineering = new() { Name = "Computer Science + Bioengineering, BS", MajorCode = "6151", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bioengineering-bs" };
-    //public static DegreeProgram CS_Chemistry = new() { Name = "Computer Science + Chemistry, BSLAS", MajorCode = "5350", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-chemistry-bslas" };
-    //public static DegreeProgram CS_Crop_Sciences = new() { Name = "Computer Science + Crop Sciences, BS", MajorCode = "5623", CatalogYear = 2024, CatalogUrl = "aces/computer-science-crop-sciences-bs" };
-    //public static DegreeProgram CS_Economics = new() { Name = "Computer Science + Economics, BSLAS", MajorCode = "5667", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-economics-bslas" };
+
 
 
 
