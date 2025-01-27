@@ -2,7 +2,7 @@
 
 @if (!string.IsNullOrEmpty(Model.Area.Title) && Model.Area.Hours is not null)
 {
-    <tr data-level="@Model.Level">
+    <tr class="fw-semibold" data-level="@Model.Level">
         <td colspan="2">@Model.Area.Title</td>
         <td class="hourscol">@Model.Area.Hours</td>
     </tr>
