@@ -4,7 +4,18 @@ public class ComputerSciencePlusXSectionParser : ISectionParser
     public List<DegreeRequirementSection> Parse(HtmlNode requirementsNode)
     {
         var sectionTable = requirementsNode.ChildNodes.Where(n => n.Name == "table").FirstOrDefault();
-        var parsedTable = new ComputerSciencePlusXTableParser().Parse(sectionTable);
+
+        DegreeRequirementTable? parsedTable = null;
+
+        if (requirementsNode.OwnerDocument.DocumentNode.SelectSingleNode("//h1[@class='page-title']")?.InnerText.Trim() == "Computer Science + Economics, BSLAS")
+        {
+            parsedTable = new ComputerSciencePlusEconTableParser().Parse(sectionTable);
+        }
+        else
+        {
+            parsedTable = new ComputerSciencePlusXTableParser().Parse(sectionTable);
+        }
+
 
         return new()
         {

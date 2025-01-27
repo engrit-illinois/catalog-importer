@@ -108,8 +108,16 @@ public abstract class BaseTableParser
 
             if (level > 0)
             {
-                var (minHours, maxHours) = TableRowParser.GetRowCreditHours(row);
                 list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
+
+                // CS + Physics, Computer Science Core table has a three-column area header (comment) "CS Technical Elective"
+                if (row.ChildNodes.Count == 3)
+                {
+                    list.Title += ". " + row.SelectSingleNode(".//td[2]").InnerText.Trim();
+                }
+
+                var (minHours, maxHours) = TableRowParser.GetRowCreditHours(row);
+
                 list.HoursMin = minHours;
                 list.HoursMax = maxHours;
             }

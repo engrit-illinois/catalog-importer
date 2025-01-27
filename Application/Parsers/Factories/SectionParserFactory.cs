@@ -4,9 +4,9 @@ public class SectionParserFactory
 
     public ISectionParser GetParser(DegreeEntry degree)
     {
-        string[] csPlusXMajorCodes = ["5864", "5348", "5349", "6151", "5350", "5623", "5667",];
+        string[] csPlusXNonEngrMajorCodes = ["5348", "5349", "5350", "5623", "5667", "5673", "5864"];
 
-        if (degree.CatalogYear == 2024 && csPlusXMajorCodes.Contains(degree.MajorCode))
+        if (degree.CatalogYear == 2024 && csPlusXNonEngrMajorCodes.Contains(degree.MajorCode))
         {
             return new ComputerSciencePlusXSectionParser();
         }

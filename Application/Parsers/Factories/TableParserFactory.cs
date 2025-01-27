@@ -29,6 +29,11 @@ public static class TableParserFactory
         {
             return new ComputerScienceTechElectTableParser();
         }
+        //else if (firstRowNode is not null
+        //    && firstRowNode.ChildNodes[0].InnerText.Equals("Course List Code Title Hours Required Computer Science Courses:"))
+        //{
+        //    return new ComputerSciencePlusEconTableParser();
+        //}
         else if (DegreeTitle == "Computer Science + Physics, BS"
                  && (new[] { "Computer Science Core", "Physics Core" }.Contains(sectionTitle))
         )
