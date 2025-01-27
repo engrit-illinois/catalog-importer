@@ -40,13 +40,13 @@ public static class TableParserFactory
         {
             return new ComputerSciencePlusPhysicsCoreTableParser();
         }
-        else if (hasArea)
-        {
-            return new SingleAreaLevelTableParser();
-        }
         else if (hasAreaSubArea)
         {
             return new MultiAreaLevelTableParser();
+        }
+        else if (hasArea)
+        {
+            return new SingleAreaLevelTableParser();
         }
 
         return new SimpleTableParser();

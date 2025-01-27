@@ -144,7 +144,19 @@ internal static class HtmlNodeExtensions
             throw new ArgumentException("The provided HtmlNode is not a table.", nameof(tableNode));
         }
 
-        return tableNode.TableBodyNode().ChildNodes.Any(c => c.HasClass(CatalogInfo.s_commentIndentClass));
+        var childNodes = tableNode.TableBodyNode().ChildNodes;
+
+        foreach (var child in childNodes.Where(c => c.Name == "tr"))
+        {
+
+            if (child.FirstChild.FirstChild != null && child.FirstChild.FirstChild.HasClass(CatalogInfo.s_commentClass))
+            {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     internal static HtmlNode? GetFirstRow(this HtmlNode tableNode)
