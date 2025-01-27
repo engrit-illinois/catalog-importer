@@ -108,8 +108,10 @@ public abstract class BaseTableParser
 
             if (level > 0)
             {
+                var (minHours, maxHours) = TableRowParser.GetRowCreditHours(row);
                 list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
-                list.Hours = CourseRowParser.GetRowCreditHours(row);
+                list.HoursMin = minHours;
+                list.HoursMax = maxHours;
             }
 
             if (level == 1 || (rowIndex == 1 && level == 0)) // if first row is course, create area.
@@ -142,7 +144,7 @@ public abstract class BaseTableParser
                 && row.ChildNodes[0].InnerText.Trim() != "Total Hours" // NPRE: Plasma & Fusion Science & Engineering, "Professional Concentration Area" table uses a course comment at the bottom instead of "listsum" class
             )
             {
-                var course = CourseRowParser.Parse(row);
+                var course = TableRowParser.Parse(row);
                 (currentLevel4 ?? currentLevel3 ?? currentLevel2 ?? currentLevel1)?.DegreeRequirementCourses.Add(course);
             }
 

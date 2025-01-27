@@ -1,7 +1,8 @@
 ﻿namespace Application.Common.Utilities;
 internal static partial class HoursHelper
 {
-    [GeneratedRegex(@"(\d+)\s+(?:or|to)\s+(\d+)")]
+    // Matches "6 or 7" or "6 to 7" or "6-7"
+    [GeneratedRegex(@"(\d+)\s*(?:or|to|-)\s*(\d+)")]
     internal static partial Regex HoursRegex();
 
     internal static (byte minHours, byte maxHours) FromText(string hours)

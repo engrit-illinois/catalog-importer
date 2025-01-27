@@ -12,7 +12,7 @@ public class DegreeModel(RequirementProcessor requirementProcessor) : PageModel
     public string AcademicLevel { get; set; } = string.Empty;
 
     [BindProperty(SupportsGet = true)]
-    public string Year { get; set; } = string.Empty;
+    public int Year { get; set; }
 
     [BindProperty(SupportsGet = true)]
     public string CatalogPath { get; set; } = string.Empty;
@@ -26,12 +26,9 @@ public class DegreeModel(RequirementProcessor requirementProcessor) : PageModel
 
     public async Task OnGetAsync()
     {
-        var degreeEntry = new DegreeEntry
-        {
-            CatalogUrl = CatalogPath,
-            CatalogYear = int.Parse(Year),
-        };
-
+        var degreeEntry = DegreePrograms.AllDepartments.
+            SelectMany(x => x.DegreeEntries)
+            .First(d => d.CatalogUrl == CatalogPath && d.CatalogYear == Year);
         DegreeEntryResult = await _requirementProcessor.Process(degreeEntry);
     }
 }

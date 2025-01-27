@@ -24,7 +24,7 @@ public class SimpleTableParser : BaseTableParser, ITableParser
                 continue;
             }
 
-            var courseRow = CourseRowParser.Parse(row);
+            var courseRow = TableRowParser.Parse(row);
             tableArea.DegreeRequirementCourses.Add(courseRow);
         }
 

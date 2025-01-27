@@ -10,7 +10,7 @@ public static class DependencyInjection
             .AddScoped<PageScraper>()
             .AddScoped<SectionParserFactory>()
             .AddScoped<ISectionParser, DefaultSectionParser>()
-            .AddScoped<CourseRowParser>()
+            .AddScoped<TableRowParser>()
             .AddScoped<RequirementProcessor>();
 
         return services;

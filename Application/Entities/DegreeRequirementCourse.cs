@@ -28,6 +28,10 @@ public partial class DegreeRequirementCourse
 
     public string? AltCourse3Description { get; set; }
 
+    public string? AltCourse4 { get; set; }
+
+    public string? AltCourse4Description { get; set; }
+
     public int TableListId { get; set; }
 
     public virtual DegreeRequirementTableArea TableList { get; set; } = null!;

@@ -1,10 +1,22 @@
 ﻿@model (DegreeRequirementTableArea Area, int Level)
 
-@if (!string.IsNullOrEmpty(Model.Area.Title) && Model.Area.Hours is not null)
+@if (!string.IsNullOrEmpty(Model.Area.Title) && Model.Area.HoursMin is not null)
 {
     <tr class="fw-semibold" data-level="@Model.Level">
         <td colspan="2">@Model.Area.Title</td>
-        <td class="hourscol">@Model.Area.Hours</td>
+        <td class="hourscol">
+            @if(Model.Area.HoursMin > 0)
+            {
+                @if (Model.Area.HoursMax is not null && Model.Area.HoursMax > 0)
+                {
+                    <span>@Model.Area.HoursMin-@Model.Area.HoursMax</span>
+                }
+                else
+                {
+                    <span>@Model.Area.HoursMin</span>
+                }
+            }
+        </td>
     </tr>
 }
 

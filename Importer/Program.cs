@@ -11,7 +11,7 @@ var serviceProvider = new ServiceCollection()
 Console.WriteLine("Let's Parse!");
 
 //var civilEngineeringDegree = Degrees.CivilAndEnvironmentalEngineering.DegreeEntries.First(p => p.MajorCode == "0106");
-var aerospaceEngineeringDegree = Degrees.AerospaceEngineering.DegreeEntries.First(d => d.CatalogYear == 2024 && d.MajorCode == "1647");
+var aerospaceEngineeringDegree = DegreePrograms.AerospaceEngineering.DegreeEntries.First(d => d.CatalogYear == 2024 && d.MajorCode == "1647");
 var processor = serviceProvider.GetRequiredService<RequirementProcessor>();
 
 var data = await processor.Process(aerospaceEngineeringDegree);

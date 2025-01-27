@@ -12,6 +12,16 @@
         {
             <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse2</span>
         }
+
+        @if (Model.Course.AltCourse3 is not null)
+        {
+            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse3</span>
+        }
+
+        @if (Model.Course.AltCourse4 is not null)
+        {
+            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse4</span>
+        }
     </td>
     <td>
         @Model.Course.Description
@@ -24,6 +34,16 @@
         @if (!string.IsNullOrEmpty(Model.Course.AltCourse2))
         {
             <span class="d-block">@Model.Course.AltCourse2Description</span>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Course.AltCourse3))
+        {
+            <span class="d-block">@Model.Course.AltCourse3Description</span>
+        }
+
+        @if (!string.IsNullOrEmpty(Model.Course.AltCourse4))
+        {
+            <span class="d-block">@Model.Course.AltCourse4Description</span>
         }
      </td>
      <td class="hourscol">
@@ -38,7 +58,7 @@
                  <span>@Model.Course.HoursMin to @Model.Course.HoursMax</span>
              }
          }
-         else
+         else if(Model.Course.HoursMin > 0)
          {
              <span>@Model.Course.HoursMin</span>
          }

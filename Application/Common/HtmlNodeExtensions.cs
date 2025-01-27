@@ -205,4 +205,25 @@ internal static class HtmlNodeExtensions
 
         return rows;
     }
+
+    internal static HtmlNode? GetNextTableRow(this HtmlNode rowNode)
+    {
+        if (rowNode.Name != "tr")
+        {
+            throw new ArgumentException("The provided HtmlNode is not a table.", nameof(rowNode));
+        }
+
+        var next = rowNode.NextSibling;
+
+        while (next != null)
+        {
+            if (next.NodeType == HtmlNodeType.Element && next.Name == "tr")
+            {
+                return next;
+            }
+            next = next.NextSibling;
+        }
+
+        return null;
+    }
 }

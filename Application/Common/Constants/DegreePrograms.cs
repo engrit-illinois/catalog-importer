@@ -1,6 +1,6 @@
 ﻿namespace Application.Common.Constants;
 
-public static class Degrees
+public static class DegreePrograms
 {
     public static readonly Department AerospaceEngineering = new()
     {
@@ -63,10 +63,11 @@ public static class Degrees
         Name = "Siebel School of Computing and Data Science",
         DegreeEntries = {
             new() { Name = "Computer Science, BS", MajorCode = "0112", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bs" },
+            new() { Name = "Computer Science + Advertising, BS", MajorCode = "5673", CatalogYear = 2024, CatalogUrl = "eng_media/computer-science-advertising-bs/" },
             new() { Name = "Computer Science + Animal Sciences, BS", MajorCode = "5864", CatalogYear = 2024, CatalogUrl = "aces/computer-science-animal-sciences-bs" },
             new() { Name = "Computer Science + Anthropology, BSLAS", MajorCode = "5348", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-anthropology-bslas" },
-            new() { Name = "Computer Science + Astronomy, BSLAS", MajorCode = "5349", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-astronomy-bslas" },
-            new() { Name = "Computer Science + Bioengineering, BS", MajorCode = "6151", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bioengineering-bs" },
+            new() { Name = "Computer Science + Astronomy, BSLAS", MajorCode = "5349", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-astronomy-bs" },
+            // TODO new() { Name = "Computer Science + Bioengineering, BS", MajorCode = "6151", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bioengineering-bs" },
             new() { Name = "Computer Science + Chemistry, BSLAS", MajorCode = "5350", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-chemistry-bslas" },
             new() { Name = "Computer Science + Crop Sciences, BS", MajorCode = "5623", CatalogYear = 2024, CatalogUrl = "aces/computer-science-crop-sciences-bs" },
             new() { Name = "Computer Science + Economics, BSLAS", MajorCode = "5667", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-economics-bslas" },

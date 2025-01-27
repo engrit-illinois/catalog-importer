@@ -6,7 +6,8 @@ public class DegreeRequirementTableArea
     public string Title { get; set; } = string.Empty;
     public string Instructions { get; set; } = string.Empty;
     public string? Comment { get; set; }
-    public byte? Hours { get; set; }
+    public byte? HoursMin { get; set; }
+    public byte? HoursMax { get; set; }
     public int TypeId { get; set; }
     public int? ParentTableAreaId { get; set; }
 
