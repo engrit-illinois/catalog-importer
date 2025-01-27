@@ -9,18 +9,10 @@
 
     <h2>2024-2025</h2>
     <ul>
-        @foreach (var department in DegreePrograms.AllDepartments)
+        @foreach (var degreeEntry in DegreePrograms.AllDepartments.SelectMany(x => x.DegreeEntries).OrderBy(x => x.Name))
         {
-            <li>
-                <h3>@department.Name</h3>
-                <ul>
-                    @foreach (var degree in department.DegreeEntries.Where(d => d.CatalogYear == 2024))
-                    {
-                        var url = $"/degrees/undergraduate/{degree.CatalogYear}/{degree.CatalogUrl}";
-                        <li><a href="@Html.Raw(url)">@degree.Name</a></li>
-                    }
-                </ul>
-            </li>
+            var url = $"/degrees/undergraduate/{degreeEntry.CatalogYear}/{degreeEntry.CatalogUrl}";
+            <li><a href="@Html.Raw(url)">@degreeEntry.Name</a></li>
         }
     </ul>
 </div>

@@ -6,6 +6,8 @@ public static class TableParserFactory
         bool hasArea = tableNode.HasTableArea();
         bool hasAreaSubArea = tableNode.HasTableSubArea();
         HtmlNode? firstRowNode = tableNode.GetFirstRow();
+        string? DegreeTitle = tableNode.OwnerDocument.DocumentNode.SelectSingleNode("//h1[@class='page-title']")?.InnerText.Trim();
+        string? sectionTitle = tableNode.ParentNode?.InnerText.Trim();
 
         if (firstRowNode is not null
             && firstRowNode.InnerText.StartsWith("Students choose a primary and a secondary field"))
@@ -26,6 +28,12 @@ public static class TableParserFactory
             && firstRowNode.ChildNodes[0].InnerText.EndsWith("Non-CS tech electives will not be considered in focus areas."))
         {
             return new ComputerScienceTechElectTableParser();
+        }
+        else if (DegreeTitle == "Computer Science + Physics, BS"
+                 && (new[] { "Computer Science Core", "Physics Core" }.Contains(sectionTitle))
+        )
+        {
+            return new ComputerSciencePlusPhysicsCoreTableParser();
         }
         else if (hasArea)
         {

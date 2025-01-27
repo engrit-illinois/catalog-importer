@@ -1,6 +1,4 @@
-﻿using Application.Parsers.Factories;
-
-namespace Application.Parsers.SectionParsers;
+﻿namespace Application.Parsers.SectionParsers;
 public class DefaultSectionParser : ISectionParser
 {
     public List<DegreeRequirementSection> Parse(HtmlNode requirementsNode)

@@ -41,6 +41,11 @@ internal static class HtmlNodeExtensions
         return htmlNode.SelectNodes(".//h3 | .//p[count(strong) = 1 and count(*) = 1]");
     }
 
+    internal static HtmlNode? GetClosestHtmlSectionHeading(this HtmlNode htmlNode)
+    {
+        return htmlNode.SelectSingleNode("preceding-sibling::h3[1] | preceding-sibling::p[count(strong) = 1 and count(*) = 1][1]");
+    }
+
     internal static HtmlNodeCollection GetHtmlSectionInstructions(this HtmlNode sectionNode)
     {
         var instructionNodes = new HtmlNodeCollection(null);
@@ -66,7 +71,7 @@ internal static class HtmlNodeExtensions
     {
         if (sectionNode != null)
         {
-            var tables = new HtmlNodeCollection(null);
+            var tables = new HtmlNodeCollection(sectionNode);
             var current = sectionNode.NextSibling;
 
             while (current != null)
