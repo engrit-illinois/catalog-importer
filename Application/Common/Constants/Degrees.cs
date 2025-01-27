@@ -46,26 +46,34 @@ public static class Degrees
         }
     };
 
+    public static readonly Department ChemicalAndBiomolecularEngineering = new()
+    {
+        Name = "Chemical & Biomolecular Engineering",
+        CatalogKey = "las",
+        DegreeEntries = {
+            //TODO
+        }
+    };
+
+    public static readonly Department ElectricalAndComputerAndEngineering = new()
+    {
+        Name = "Electrical & Computer Engineering",
+        CatalogKey = "las",
+        DegreeEntries = {
+            new() { Name = "Computer Engineering, BS", MajorCode = "0109", CatalogYear = 2024, CatalogUrl = "engineering/computer-engineering-bs" }
+        }
+    };
+
     public static readonly IReadOnlyList<Department> AllDepartments = new List<Department>
     {
         AerospaceEngineering,
         AgriculturalAndBiologicalEngineering,
-        CivilAndEnvironmentalEngineering,
         Bioengineering,
+        CivilAndEnvironmentalEngineering,
+        ElectricalAndComputerAndEngineering,
     }
     .OrderBy(d => d.Name).ToList();
 
-    //public static DegreeProgram AERO = new() { Name = "Aerospace Engineering, BS", MajorCode = "4048", CatalogYear = 2024, CatalogUrl = "engineering/aerospace-engineering-bs" };
-    //public static DegreeProgram ABE = new() { Name = "Agricultural & Biological Engineering, BS", MajorCode = "5163", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs" };
-    //public static DegreeProgram ABE_Bioprocess = new() { Name = "Agricultural & Biological Engineering: Bioprocess Engineering and Industrial Biotechnology", MajorCode = "5163", ConcentrationCode = "6223", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/bioprocess-engineering-industrial-biotechnology" };
-    //public static DegreeProgram ABE_Off_Highway = new() { Name = "Agricultural & Biological Engineering: Off-Highway Vehicle and Equipment Engineering", MajorCode = "5163", ConcentrationCode = "6221", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/off-highway-vehicle-equipment-engineering" };
-    //public static DegreeProgram ABE_Renewable_Energy = new() { Name = "Agricultural & Biological Engineering: Renewable Energy Systems Engineering", MajorCode = "5163", ConcentrationCode = "6222", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/renewable-energy-systems-engineering" };
-    //public static DegreeProgram ABE_Soil_Water = new() { Name = "Agricultural & Biological Engineering: Soil and Water Resources Engineering", MajorCode = "5163", ConcentrationCode = "6218", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/soil-water-resources-engineering" };
-    //public static DegreeProgram ABE_Sustainable_Eco = new() { Name = "Agricultural & Biological Engineering: Sustainable Ecological and Environmental Systems Engineering", MajorCode = "5163", ConcentrationCode = "6219", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/sustainable-ecological-environmental-systems-engineering" };
-    //public static DegreeProgram ABE_Syntehtic_Bio = new() { Name = "Agricultural & Biological Engineering: Synthetic Biological Engineering", MajorCode = "5163", ConcentrationCode = "6220", CatalogYear = 2024, CatalogUrl = "eng_aces/agricultural-biological-engineering-bs/synthetic-biological-engineering" };
-    //public static DegreeProgram BIOE = new() { Name = "Bioengineering, BS", MajorCode = "0408", CatalogYear = 2024, CatalogUrl = "engineering/bioengineering-bs" };
-    //public static DegreeProgram CE = new() { Name = "Civil Engineering, BS", MajorCode = "0106", CatalogYear = 2024, CatalogUrl = "engineering/civil-engineering-bs" };
-    //public static DegreeProgram COMPE = new() { Name = "Computer Engineering, BS", MajorCode = "0109", CatalogYear = 2024, CatalogUrl = "engineering/computer-engineering-bs" };
     //public static DegreeProgram CS = new() { Name = "Computer Science, BS", MajorCode = "0112", CatalogYear = 2024, CatalogUrl = "engineering/computer-science-bs" };
     //public static DegreeProgram CS_Animal_Science = new() { Name = "Computer Science + Animal Sciences, BS", MajorCode = "5864", CatalogYear = 2024, CatalogUrl = "aces/computer-science-animal-sciences-bs" };
     //public static DegreeProgram CS_Anthropology = new() { Name = "Computer Science + Anthropology, BSLAS", MajorCode = "5348", CatalogYear = 2024, CatalogUrl = "eng_las/computer-science-anthropology-bslas" };

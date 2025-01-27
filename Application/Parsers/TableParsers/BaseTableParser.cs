@@ -13,7 +13,7 @@ public abstract class BaseTableParser
     internal const int courseRowColumnCount = 3;
     internal static readonly string[] s_tableTitleElements = ["h3", "h4", "h5", "h6"];
 
-    protected static byte GetTableSummaryHours(HtmlNode tableNode)
+    protected virtual byte GetTableSummaryHours(HtmlNode tableNode)
     {
         byte hours = 0;
         HtmlNode? hoursNode = null;
@@ -83,29 +83,6 @@ public abstract class BaseTableParser
         return instructionNode?.InnerText.Trim();
     }
 
-
-    //internal virtual Func<HtmlNode, int> GetHeaderType(HtmlNode row)
-    //{
-    //    HtmlNode commentNode = row.SelectSingleNode($".//td[1]/div/span[contains(@class, '{s_commentClass}')]")
-    //                            ?? row.SelectSingleNode($".//td[1]/span[contains(@class, '{s_commentClass}')]");
-    //    HtmlNode hoursNode = row.SelectSingleNode($".//td[2][contains(@class, '{s_hoursColClass}')]");
-    //    bool isHoursRow = hoursNode != null && !string.IsNullOrEmpty(hoursNode.InnerText);
-    //    bool isFirstRow = row.GetAttributeValue("class", "").Contains(s_firstRowClass);
-    //    bool isAreaHeader = row.GetAttributeValue("class", "").Contains(s_areaHeaderClass);
-    //    bool isComment = commentNode != null;
-    //    bool isIndentedComment = commentNode != null && commentNode.GetAttributeValue("class", "").Contains(s_commentIndentClass);
-
-    //    bool isActuallyCourse = row.ChildNodes.Count == 2 && row.ChildNodes[0].InnerText.Trim() == "Any 400 level MATH course, excluding MATH 415, MATH 441, and MATH 442"; // Engineering Mechanics, Secondary Field Option Electives
-
-    //    bool isLevel1 =
-    //            (isAreaHeader && !isHoursRow && !isIndentedComment)
-    //            || isAreaHeader && row.ChildNodes[0].InnerText.Trim().EndsWith(':') // skip Electrical Engineering Tech Electives, "Non-ECE courses from list below:". It should be second level
-    //            || row.ChildNodes[0].InnerText.Trim() == "Human Factors" // Industrial Engineering, "Human Factors" row
-    //            || (row.ChildNodes[0].InnerText.EndsWith("Electives") && !isHoursRow); // Nuclear Plasma...: Plasma & Fusion Science & Engineering, Professional Concentration Area, "Electives" rows
-
-    //    return isLevel1 ? 1 : default;
-    //}
-
     //private static Func<HtmlNode, int> GetHeaderType = (HtmlNode row) =>
 
     /* Examples to check:
@@ -123,6 +100,7 @@ public abstract class BaseTableParser
         DegreeRequirementTableArea? currentLevel3 = null;
         DegreeRequirementTableArea? currentLevel4 = null;
 
+        int rowIndex = 1;
         foreach (var row in rows)
         {
             DegreeRequirementTableArea list = new();
@@ -134,7 +112,7 @@ public abstract class BaseTableParser
                 list.Hours = CourseRowParser.GetRowCreditHours(row);
             }
 
-            if (level == 1)
+            if (level == 1 || (rowIndex == 1 && level == 0)) // if first row is course, create area.
             {
                 //list.Title = row.SelectSingleNode(".//td[1]")?.InnerText.Trim() ?? "";
                 //list.Hours = CourseRowParser.GetRowCreditHours(row);
@@ -167,6 +145,8 @@ public abstract class BaseTableParser
                 var course = CourseRowParser.Parse(row);
                 (currentLevel4 ?? currentLevel3 ?? currentLevel2 ?? currentLevel1)?.DegreeRequirementCourses.Add(course);
             }
+
+            rowIndex++;
         }
 
         return lists;

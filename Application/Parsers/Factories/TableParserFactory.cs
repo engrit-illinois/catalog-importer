@@ -7,7 +7,6 @@ public static class TableParserFactory
         bool hasAreaSubArea = tableNode.HasTableSubArea();
         HtmlNode? firstRowNode = tableNode.GetFirstRow();
 
-
         if (firstRowNode is not null
             && firstRowNode.InnerText.StartsWith("Students choose a primary and a secondary field"))
         {
@@ -18,6 +17,12 @@ public static class TableParserFactory
         {
             return new BioengineeringTracksTableParser();
         }
+        else if (firstRowNode is not null
+            && firstRowNode.InnerText.StartsWith("From the Departmentally Approved List"))
+        {
+            return new ComputerEngineeringTrackTableParser();
+        }
+
         else if (hasArea)
         {
             return new SingleAreaLevelTableParser();
