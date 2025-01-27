@@ -1,29 +1,35 @@
 ﻿@model (Application.Entities.DegreeRequirementCourse Course, int Level)
+@{
+    bool isCommentRow = string.IsNullOrEmpty(Model.Course.SubjectCode);
+}
 
 <tr data-list-course-level="@(Model.Level)">
-    <td style="width:200px;" class="ps-@(Model.Level + 1)">
-        <span>@Model.Course.SubjectCode @Model.Course.CourseNumber</span>
-        @if (Model.Course.AltCourse1 is not null)
-        {
-            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse1</span>
-        }
+    @if(!isCommentRow){
+        <td style="width:200px;" class="ps-@(Model.Level + 1)">
+            <span>@Model.Course.SubjectCode @Model.Course.CourseNumber</span>
+            @if (Model.Course.AltCourse1 is not null)
+            {
+                <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse1</span>
+            }
 
-        @if (Model.Course.AltCourse2 is not null)
-        {
-            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse2</span>
-        }
+            @if (Model.Course.AltCourse2 is not null)
+            {
+                <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse2</span>
+            }
 
-        @if (Model.Course.AltCourse3 is not null)
-        {
-            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse3</span>
-        }
+            @if (Model.Course.AltCourse3 is not null)
+            {
+                <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse3</span>
+            }
 
-        @if (Model.Course.AltCourse4 is not null)
-        {
-            <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse4</span>
-        }
-    </td>
-    <td>
+            @if (Model.Course.AltCourse4 is not null)
+            {
+                <span class="d-block ps-2">@Model.Course.AltQuantifier @Model.Course.AltCourse4</span>
+            }
+        </td>
+    }
+
+    <td @Html.Raw(isCommentRow ? "colspan=\"2\"" : "")>
         @Model.Course.Description
 
         @if (!string.IsNullOrEmpty(Model.Course.AltCourse1))

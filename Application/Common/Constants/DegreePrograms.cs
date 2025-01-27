@@ -54,7 +54,9 @@ public static class DegreePrograms
     {
         Name = "Electrical & Computer Engineering",
         DegreeEntries = {
-            new() { Name = "Computer Engineering, BS", MajorCode = "0109", CatalogYear = 2024, CatalogUrl = "engineering/computer-engineering-bs" }
+            new() { Name = "Computer Engineering, BS", MajorCode = "0109", CatalogYear = 2024, CatalogUrl = "engineering/computer-engineering-bs" },
+            new() { Name = "Electrical Engineering, BS", MajorCode = "0115", CatalogYear = 2024, CatalogUrl = "engineering/electrical-engineering-bs" },
+
         }
     };
 
@@ -139,7 +141,7 @@ public static class DegreePrograms
         DepartmentOfAnthropology,
         DepartmentOfAstronomy,
         DepartmentOfChemistry,
-        DepartmentOfEconomics
+        DepartmentOfEconomics,
     }
     .OrderBy(d => d.Name).ToList();
 

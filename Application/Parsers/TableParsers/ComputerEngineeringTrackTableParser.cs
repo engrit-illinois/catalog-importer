@@ -47,13 +47,11 @@ public class ComputerEngineeringTrackTableParser : BaseTableParser, ITableParser
         {
             return 1;
         }
-        else if (isComment)
-        {
-            return 2;
-        }
-        else
-        {
-            return 0;
-        }
+        //else if (isComment)
+        //{
+        //    return 2;
+        //}
+
+        return 0;
     };
 }

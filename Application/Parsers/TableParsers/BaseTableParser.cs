@@ -148,11 +148,24 @@ public abstract class BaseTableParser
             }
             // Course rows only, skip comments for now
             else if (
-                row.ChildNodes.Count == courseRowColumnCount
-                && row.ChildNodes[0].InnerText.Trim() != "Total Hours" // NPRE: Plasma & Fusion Science & Engineering, "Professional Concentration Area" table uses a course comment at the bottom instead of "listsum" class
+                //row.ChildNodes.Count == courseRowColumnCount
+                row.ChildNodes[0].InnerText.Trim() != "Total Hours" // NPRE: Plasma & Fusion Science & Engineering, "Professional Concentration Area" table uses a course comment at the bottom instead of "listsum" class
             )
             {
-                var course = TableRowParser.Parse(row);
+                DegreeRequirementCourse course;
+
+                if (row.ChildNodes.Count == 2)
+                {
+                    course = new()
+                    {
+                        Description = row.ChildNodes[0].InnerText.Trim()
+                    };
+                }
+                else
+                {
+                    course = TableRowParser.Parse(row);
+                }
+
                 (currentLevel4 ?? currentLevel3 ?? currentLevel2 ?? currentLevel1)?.DegreeRequirementCourses.Add(course);
             }
 
