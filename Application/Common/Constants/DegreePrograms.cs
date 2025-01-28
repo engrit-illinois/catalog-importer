@@ -127,6 +127,14 @@ public static class DegreePrograms
         }
     };
 
+    public static readonly Department Unsorted = new()
+    {
+        Name = "",
+        DegreeEntries = {
+            new() { Name = "Engineering Mechanics, BS", MajorCode = "0118", CatalogYear = 2024, CatalogUrl = "engineering/engineering-mechanics-bs" }
+        }
+    };
+
     public static readonly IReadOnlyList<Department> AllDepartments = new List<Department>
     {
         AerospaceEngineering,
@@ -142,14 +150,12 @@ public static class DegreePrograms
         DepartmentOfAstronomy,
         DepartmentOfChemistry,
         DepartmentOfEconomics,
+        Unsorted
     }
     .OrderBy(d => d.Name).ToList();
 
 
 
-
-
-    //public static DegreeProgram EE = new() { Name = "Electrical Engineering, BS", MajorCode = "0115", CatalogYear = 2024, CatalogUrl = "engineering/electrical-engineering-bs" };
     //public static DegreeProgram EM = new() { Name = "Engineering Mechanics, BS", MajorCode = "0118", CatalogYear = 2024, CatalogUrl = "engineering/engineering-mechanics-bs" };
     //public static DegreeProgram EngineeringUndeclared = new() { Name = "Engineering Undeclared", MajorCode = "5333", CatalogYear = 2024, CatalogUrl = "engineering/engineering-undeclared" };
     //public static DegreeProgram EnvironmentalEngineeringBS = new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogYear = 2024, CatalogUrl = "engineering/environmental-engineering-bs" };
