@@ -1,5 +1,5 @@
 ﻿using Application.Common.Utilities;
-using Application.Parsers;
+using Application.Parsers.EngineeringMechanics;
 
 namespace Application;
 public class RequirementProcessor(PageScraper scraper, SectionParserFactory factory)
@@ -14,15 +14,23 @@ public class RequirementProcessor(PageScraper scraper, SectionParserFactory fact
 
         //degree.DegreeRequirementSections = _factory.GetParser(degree).Parse(html);
 
-        if (degree.MajorCode == "0118" && degree.CatalogYear == 2024)
+        ISectionParser degreeParser;
+
+        if (degree.MajorCode == "0118")
         {
-            var degreeParser = new EngineeringMechanicsDegreeParser();
-            degree.DegreeRequirementSections = degreeParser.Parse(html);
+            degreeParser = new EngineeringMechanicsDegreeParser();
+        }
+        else if (degree.MajorCode == "1233")
+        {
+            degreeParser = new EnvironmentalEngineeringDegreeParser();
         }
         else
         {
-            degree.DegreeRequirementSections = _factory.GetParser(degree).Parse(html);
+            degreeParser = _factory.GetParser(degree);
         }
+
+        degree.DegreeRequirementSections = degreeParser.Parse(html);
+
 
         return degree;
     }

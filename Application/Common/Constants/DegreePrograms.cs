@@ -131,7 +131,8 @@ public static class DegreePrograms
     {
         Name = "",
         DegreeEntries = {
-            new() { Name = "Engineering Mechanics, BS", MajorCode = "0118", CatalogYear = 2024, CatalogUrl = "engineering/engineering-mechanics-bs" }
+            new() { Name = "Engineering Mechanics, BS", MajorCode = "0118", CatalogYear = 2024, CatalogUrl = "engineering/engineering-mechanics-bs" },
+            new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogYear = 2024, CatalogUrl = "engineering/environmental-engineering-bs" }
         }
     };
 
@@ -156,7 +157,6 @@ public static class DegreePrograms
 
 
 
-    //public static DegreeProgram EM = new() { Name = "Engineering Mechanics, BS", MajorCode = "0118", CatalogYear = 2024, CatalogUrl = "engineering/engineering-mechanics-bs" };
     //public static DegreeProgram EngineeringUndeclared = new() { Name = "Engineering Undeclared", MajorCode = "5333", CatalogYear = 2024, CatalogUrl = "engineering/engineering-undeclared" };
     //public static DegreeProgram EnvironmentalEngineeringBS = new() { Name = "Environmental Engineering, BS", MajorCode = "1233", CatalogYear = 2024, CatalogUrl = "engineering/environmental-engineering-bs" };
     //public static DegreeProgram IndustrialEngineeringBS = new() { Name = "Industrial Engineering, BS", MajorCode = "0127", CatalogYear = 2024, CatalogUrl = "engineering/industrial-engineering-bs" };

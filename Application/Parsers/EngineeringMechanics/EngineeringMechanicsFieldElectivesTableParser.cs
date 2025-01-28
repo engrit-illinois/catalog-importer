@@ -1,4 +1,4 @@
-﻿namespace Application.Parsers.TableParsers;
+﻿namespace Application.Parsers.EngineeringMechanics;
 
 public class EngineeringMechanicsFieldElectivesTableParser : BaseTableParser, ITableParser
 {

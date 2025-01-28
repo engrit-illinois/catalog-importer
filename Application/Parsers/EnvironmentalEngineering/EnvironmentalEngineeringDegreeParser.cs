@@ -1,5 +1,5 @@
-﻿namespace Application.Parsers;
-internal class EngineeringMechanicsDegreeParser
+﻿namespace Application.Parsers.EngineeringMechanics;
+internal class EnvironmentalEngineeringDegreeParser : ISectionParser
 {
     public List<DegreeRequirementSection> Parse(HtmlNode requirementsNode)
     {
@@ -19,17 +19,7 @@ internal class EngineeringMechanicsDegreeParser
 
             foreach (var sectionTable in sectionTables)
             {
-                DegreeRequirementTable? table;
-
-                if (section.Title == "Secondary Field Option Electives")
-                {
-                    table = new EngineeringMechanicsFieldElectivesTableParser().Parse(sectionTable);
-                }
-                else
-                {
-                    table = TableParserFactory.GetParser(sectionTable).Parse(sectionTable);
-                }
-
+                var table = new SingleAreaLevelTableParser().Parse(sectionTable);
                 section.DegreeRequirementTables.Add(table);
             }
 
